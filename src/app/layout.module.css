@@ -1,0 +1,15 @@
+.header {
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 0.0625em solid var(--color-border);
+  background: var(--color-bg);
+}
+.nav {
+  display: flex;
+  gap: var(--space-3);
+  list-style: none;
+}
+.main {
+  max-width: var(--size-container);
+  margin: 1.5 auto;
+  padding: 0 var(--space-4);
+}

@@ -1,33 +1,27 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@import "../styles/tokens.css";
+@import "../styles/utilities.css";
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* Global base */
 html,
 body {
-  max-width: 100vw;
-  overflow-x: hidden;
+  height: 100%;
+}
+html {
+  color-scheme: light dark;
+}
+* {
+  box-sizing: border-box;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
 }
 
 a {
@@ -35,8 +29,77 @@ a {
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+button {
+  font: inherit;
+}
+
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+  background: transparent;
+}
+
+/* Headings */
+h1 {
+  font-size: 1.75rem;
+  margin-bottom: var(--space-4);
+}
+
+h2 {
+  font-size: 1.25rem;
+  margin-bottom: var(--space-3);
+}
+
+/* Forms */
+label {
+  display: block;
+  margin-bottom: var(--space-2);
+}
+
+input[type="text"],
+input[type="date"],
+textarea,
+select {
+  width: 100%;
+  border: 0.0625em solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--space-3);
+}
+
+fieldset {
+  border: none;
+  padding: 0;
+  margin: 0 0 var(--space-5);
+}
+
+legend {
+  margin-bottom: var(--space-3);
+}
+
+[role="alert"] {
+  color: var(--error);
+  margin-top: var(--space-2);
+}
+
+/* Focus */
+:focus-visible {
+  outline: 0.125em solid var(--focus);
+  outline-offset: 0.125em;
+}
+
+/* Skip link visibility on focus */
+.skip {
+  top: auto;
+  width: 0.0625em;
+  height: 0.0625em;
+  overflow: hidden;
+}
+
+.skip:focus {
+  width: auto;
+  height: auto;
+  padding: var(--space-2);
+  background: var(--border);
 }

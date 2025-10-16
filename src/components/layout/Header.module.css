@@ -1,0 +1,25 @@
+.header {
+  border-bottom: 0.0625em solid var(--border);
+  background: var(--bg);
+}
+
+.nav {
+  display: flex;
+  gap: var(--space-4);
+  align-items: center;
+  height: 3.5em;
+}
+
+.brand {
+  font-weight: 800;
+  margin-right: auto;
+}
+
+.link {
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius);
+}
+
+.link[aria-current="page"] {
+  background: var(--border);
+}
