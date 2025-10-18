@@ -4,7 +4,7 @@ import { ClaimDraft, emptyDraft } from "./claimTypes";
 
 const KEY = "claimDraft";
 
-/** LocalStorage claim draft for demo */
+/** LocalStorage claim draft for demo; TODO: replace with redux. */
 export function useClaimDraft() {
   const [draft, setDraft] = useState<ClaimDraft>(emptyDraft);
 

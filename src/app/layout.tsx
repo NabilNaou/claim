@@ -5,6 +5,7 @@ export const metadata = {
   description: "Claim wizard demo",
 };
 
+// WCAG: First tab allows screenreaders to skip to the main content, if disabled person desires.
 export default function RootLayout({
   children,
 }: {
@@ -16,7 +17,8 @@ export default function RootLayout({
         <a href="#main" className="skip">
           Ga naar hoofdinhoud
         </a>
-        <main id="main" className="container stack">
+
+        <main id="main" tabIndex={-1} className="container stack">
           {children}
         </main>
       </body>

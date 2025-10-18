@@ -16,7 +16,7 @@ export default function ClaimStepPage() {
   const { draft, update } = useClaimDraft();
   const router = useRouter();
 
-  // Stap 1, product
+  // Stap 1, product. Radio inside fieldset is navigable with arrow keys on the keyboard.
   if (step === 1) {
     return (
       <section className="stack" aria-labelledby="h1">
