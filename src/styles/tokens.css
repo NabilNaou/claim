@@ -1,0 +1,40 @@
+:root {
+  /* Global colors */
+  --bg: #ffffff;
+  --fg: #171717;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+  --primary: #0b63ff;
+  --primary-contrast: #ffffff;
+  --error: #b91c1c;
+  --focus: #2563eb;
+
+  /* Spacing & radii between elements */
+  --radius: 0.625em;
+  --space-1: 0.25em;
+  --space-2: 0.5em;
+  --space-3: 0.75em;
+  --space-4: 1em;
+  --space-5: 1.5em;
+  --space-6: 2em;
+
+  /* Font & styling */
+  --font-sans:
+    system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial,
+    "Apple Color Emoji", "Segoe UI Emoji";
+  --font-size-base: 1em;
+  --line-height: 1.5;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0a0a0a;
+    --fg: #ededed;
+    --muted: #9ca3af;
+    --border: #2a2a2a;
+    --primary: #0072e5;
+    --primary-contrast: #0a0a0a;
+    --error: #f87171;
+    --focus: #93c5fd;
+  }
+}

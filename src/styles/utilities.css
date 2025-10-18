@@ -1,0 +1,24 @@
+.container {
+  max-width: 54rem;
+  padding: 0 var(--space-4);
+  margin: 0 auto;
+}
+
+/* Make room between all the children of specified */
+.stack > * + * {
+  margin-top: var(--space-4);
+}
+
+.inline > * + * {
+  margin-left: var(--space-3);
+}
+
+.visually-hidden {
+  position: absolute !important;
+  height: 0.0625em;
+  width: 0.0625em;
+  overflow: hidden;
+  white-space: nowrap;
+  border: 0;
+  padding: 0;
+}
