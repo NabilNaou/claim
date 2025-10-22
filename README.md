@@ -1,36 +1,17 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+- Work in progress
 
-## Getting Started
+NL:
+Het doel van dit portfolio is om een toegankelijke claimwizard te ontwikkelen als oefenproject. Ik wil hiermee vooral oefenen met onderwerpen zoals Next.js, Redux en SSR.
 
-First, run the development server:
+Het einddoel is om gebruik te maken van Next.js, React, CSS/HTML, Storybook en Redux. Het moet toegankelijk zijn (screenreader/keyboard, wcag). Clean code architectuur, en goede performance.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Het project is een set-up wizard/stepper waarbij de gebruiker van stap 1 t/m 5 gaat met wat validatie. Het is de bedoeling dat dit project niet te groot wordt.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+EN:
+The goal of this portfolio is to develop an accessible claim wizard as a practice project. I'd particularly like to practice with topics like Next, Redux, and SSR.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The ultimate goal is to use Next, React, CSS/HTML, Storybook, and Redux. It must be accessible (screen reader/keyboard, WCAG), have a clean code architecture, and perform well.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The project is a setup wizard/stepper that guides the user from steps 1 through 5, with some validation. The project is intended to be kept to a minimum.
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
