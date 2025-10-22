@@ -3,9 +3,9 @@
 NL:
 Het doel van dit portfolio is om een toegankelijke claimwizard te ontwikkelen als oefenproject. Ik wil hiermee oefenen met onderwerpen zoals Next.js, Redux en SSR.
 
-Het einddoel is om gebruik te maken van Next.js, React, CSS/HTML, Storybook en Redux. Het moet toegankelijk zijn (screenreader/keyboard, wcag). Clean code architectuur en type safe.
+Het einddoel is om gebruik te maken van Next.js, React, CSS/HTML, Storybook en Redux. Het moet toegankelijk zijn (screenreader/keyboard, wcag). Clean code architectuur en type safe. De locale is voorlopig vast ingesteld op NL (geen i18n).
 
-Het project is een set-up wizard/stepper waarbij de gebruiker van stap 1 t/m 5 gaat met wat validatie. Het is de bedoeling dat dit project niet te groot wordt.
+Het project is een set-up wizard/stepper van vijf stappen met wat validatie. Het is de bedoeling dat dit project niet te groot wordt.
 
 EN:
 The goal of this portfolio is to develop an accessible claim wizard as a practice project. This is practice for topics like Next, Redux, and SSR.
