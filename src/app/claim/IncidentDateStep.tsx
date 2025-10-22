@@ -13,34 +13,35 @@ type IncidentStepProps = {
 };
 
 /**
- * Local ISO date of today.
- * @returns
+ * Returns todays date in local ISO format.
+ * @returns {string}
  */
 function getTodayIsoLocal(): string {
   const d = new Date();
+  // Timezone offset for the correct local date calculation.
   d.setMinutes(d.getMinutes() - d.getTimezoneOffset());
   return d.toISOString().slice(0, 10);
 }
 
-/** Validatie van incidentdatum; geeft flags + boodschap terug. */
-
 /**
- * Validate the incident date, it should not be in the future.
- * @param value value the user is passing in
- * @param today date of today
+ * Validates the incident date.
+ * @param {string} value - The date string from the input.
+ * @param {string} today - Todays date string for comparison. Date shouldnt be in the future.
  * @returns
  */
 function validateIncidentDate(value: string, today: string) {
   const isEmpty = !value;
-  const isFuture = value ? value > today : false;
+  const isFuture = value > today;
+  const hasError = isEmpty || isFuture;
   let message: string | undefined;
 
-  if (isEmpty) message = "Vul een datum in.";
-  else if (isFuture) {
+  if (isEmpty) {
+    message = "Vul een datum in.";
+  } else if (isFuture) {
     message = "Datum mag niet in de toekomst liggen.";
   }
 
-  return { isEmpty, isFuture, hasError: isEmpty || isFuture, message };
+  return { isEmpty, isFuture, hasError, message };
 }
 
 export default function IncidentDateStep({
@@ -104,7 +105,7 @@ export default function IncidentDateStep({
 
         <div className={styles.error}>
           {shouldShowError && (
-            <p id={ids.error} role="alert" tabIndex={-1}>
+            <p id={ids.error} role="alert">
               {message}
             </p>
           )}
