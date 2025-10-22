@@ -4,28 +4,29 @@ import { ClaimDraft, emptyDraft } from "./claimTypes";
 
 const KEY = "claimDraft";
 
-/** LocalStorage claim draft for demo; TODO: replace with redux. */
+/** LocalStorage placeholder claim draft. TODO: replace with redux. */
 export function useClaimDraft() {
   const [draft, setDraft] = useState<ClaimDraft>(emptyDraft);
 
   useEffect(() => {
-    const raw =
-      typeof window !== "undefined" ? localStorage.getItem(KEY) : null;
+    const raw = localStorage.getItem(KEY);
     if (raw) {
       try {
         setDraft({ ...emptyDraft, ...JSON.parse(raw) });
-      } catch {}
+      } catch (error) {
+        console.error("Placeholder storing went wrong:", error);
+        localStorage.removeItem(KEY);
+      }
     }
   }, []);
 
   function update(patch: Partial<ClaimDraft>) {
-    setDraft((prev) => {
-      const next = { ...prev, ...patch };
-      if (typeof window !== "undefined")
-        localStorage.setItem(KEY, JSON.stringify(next));
-      return next;
-    });
+    setDraft((prev) => ({ ...prev, ...patch }));
   }
+
+  useEffect(() => {
+    localStorage.setItem(KEY, JSON.stringify(draft));
+  }, [draft]);
 
   return {
     draft,

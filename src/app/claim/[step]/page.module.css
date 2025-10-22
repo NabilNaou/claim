@@ -3,13 +3,14 @@
   gap: var(--space-5);
 }
 
+/* Labels & Radios */
 .radios {
   display: grid;
   gap: var(--space-3);
 }
 
-/* Mooie labels met ruimte en duidelijke klikbare targets */
 .radios label {
+  text-transform: capitalize;
   display: flex;
   align-items: center;
   gap: var(--space-3);
@@ -20,7 +21,6 @@
 }
 
 .radios input[type="radio"] {
-  /* native radio met thema-kleur voor goede a11y/contrasten */
   accent-color: var(--primary);
 }
 
