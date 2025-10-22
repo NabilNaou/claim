@@ -8,7 +8,7 @@ import { useParams, useRouter } from "next/navigation";
 
 export default function ClaimStepPage() {
   const { step: stepParam } = useParams<{ step: string }>();
-  const step = +stepParam;
+  const step = Number(stepParam) || 1; // Fallback logic for non numbers
 
   const { draft, update } = useClaimDraft();
   const router = useRouter();

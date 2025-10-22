@@ -14,9 +14,9 @@
 }
 
 .visually-hidden {
-  position: absolute !important;
-  height: 0.0625em;
-  width: 0.0625em;
+  position: absolute;
+  height: 1px;
+  width: 1px;
   overflow: hidden;
   white-space: nowrap;
   border: 0;

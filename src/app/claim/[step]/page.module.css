@@ -39,8 +39,16 @@
   border: 0.0625em solid var(--primary);
   background: var(--primary);
   color: var(--primary-contrast);
-  text-decoration: none;
+  font-weight: 500;
   cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    filter 0.15s ease;
+}
+
+.button:hover:not(:disabled) {
+  filter: brightness(0.9);
 }
 
 .button:disabled {

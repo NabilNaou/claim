@@ -1,9 +1,9 @@
 "use client";
 
-import WizardActions from "@/app/claim/WizardActions";
 import { ClaimDraft, ClaimProduct, PRODUCTS } from "@/lib/claimTypes";
 import { useRef, useState } from "react";
 import styles from "./page.module.css";
+import WizardActions from "@/app/claim/WizardActions";
 
 interface ProductStepProps {
   draft: Pick<ClaimDraft, "product">;
@@ -20,6 +20,8 @@ export default function ProductStep({
 }: ProductStepProps) {
   const [showError, setShowError] = useState(false);
   const errorRef = useRef<HTMLParagraphElement>(null);
+
+  const hasError = showError && !draft.product;
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -47,13 +49,18 @@ export default function ProductStep({
     >
       <fieldset>
         <legend>
-          Welk product gaat het om? <span aria-label="verplicht">*</span>
+          Welk product gaat het om? <span aria-hidden="true">*</span>
         </legend>
         <p id="product-help" className="visually-hidden">
-          Kies één product
+          Kies één product (verplicht)
         </p>
 
-        <div className={styles.radios} aria-describedby="product-help">
+        <div
+          className={styles.radios}
+          role="radiogroup"
+          aria-describedby="product-help"
+          aria-errormessage={hasError ? "product-error" : undefined}
+        >
           {PRODUCTS.map((product) => (
             <label key={product}>
               <input
@@ -62,13 +69,14 @@ export default function ProductStep({
                 value={product}
                 checked={draft.product === product}
                 onChange={() => handleProductChange(product)}
-              />{" "}
+                aria-invalid={hasError}
+              />
               {product}
             </label>
           ))}
         </div>
 
-        {showError && !draft.product && (
+        {hasError && (
           <p ref={errorRef} id="product-error" role="alert" tabIndex={-1}>
             Maak een keuze om door te gaan.
           </p>
