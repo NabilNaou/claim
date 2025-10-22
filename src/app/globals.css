@@ -1,7 +1,6 @@
 @import "../styles/tokens.css";
 @import "../styles/utilities.css";
 
-/* Global base */
 html,
 body {
   height: 100%;
@@ -41,7 +40,6 @@ textarea {
   background: transparent;
 }
 
-/* Headings */
 h1 {
   font-size: 1.75rem;
   margin-bottom: var(--space-4);
@@ -83,7 +81,6 @@ legend {
   margin-top: var(--space-2);
 }
 
-/* Focus */
 :focus-visible {
   outline: 0.125em solid var(--focus);
   outline-offset: 0.125em;
