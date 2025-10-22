@@ -36,6 +36,26 @@
   padding: var(--space-3);
 }
 
+.input[aria-invalid="true"]:focus-visible {
+  outline: none;
+}
+
+.field {
+  display: grid;
+  gap: var(--space-2);
+}
+
+/* helptekst (onder input) */
+.help {
+  color: var(--muted);
+  font-size: 0.95em;
+  margin: 0;
+}
+
+.input[aria-invalid="true"] {
+  border-color: var(--error);
+}
+
 .actions {
   display: flex;
   gap: var(--space-3);

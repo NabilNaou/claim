@@ -1,9 +1,9 @@
 "use client";
 
+import styles from "@/app/claim/[step]/page.module.css";
 import WizardActions from "@/app/claim/WizardActions";
 import { ClaimDraft, ClaimProduct, PRODUCTS } from "@/lib/claimTypes";
 import { useRef, useState } from "react";
-import styles from "./page.module.css";
 
 interface ProductStepProps {
   draft: Pick<ClaimDraft, "product">;

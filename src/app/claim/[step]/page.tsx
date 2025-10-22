@@ -1,14 +1,15 @@
 "use client";
 
 import PlaceholderStep from "@/app/claim/[step]/PlaceholderStep";
-import ProductStep from "@/app/claim/[step]/ProductStep";
+import IncidentDateStep from "@/app/claim/IncidentDateStep";
+import ProductStep from "@/app/claim/ProductStep";
 import Stepper from "@/components/ui/Stepper";
 import { useClaimDraft } from "@/lib/useClaimDraft";
 import { useParams, useRouter } from "next/navigation";
 
 export default function ClaimStepPage() {
   const { step: stepParam } = useParams<{ step: string }>();
-  const step = Number(stepParam) || 1; // Fallback logic for non numbers
+  const step = Number(stepParam) || 1;
 
   const { draft, update } = useClaimDraft();
   const router = useRouter();
@@ -28,7 +29,16 @@ export default function ClaimStepPage() {
         />
       )}
 
-      {step !== 1 && (
+      {step === 2 && (
+        <IncidentDateStep
+          draft={draft}
+          update={update}
+          onNext={() => router.push("/claim/3")}
+          onBack={() => router.push("/claim/1")}
+        />
+      )}
+
+      {step > 2 && (
         <PlaceholderStep
           step={step}
           onNext={() => router.push(`/claim/${step + 1}`)}
