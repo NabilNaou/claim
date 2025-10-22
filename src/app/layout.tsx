@@ -1,7 +1,7 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "ClaimFlow",
+  title: "Claim Stepper",
   description: "Claimwizard built using Next/React - demo & practice.",
   keywords: ["claimflow", "next.js", "typescript", "frontend", "react"],
   authors: [{ name: "Nabil Naou", url: "https://github.com/nabilnaou" }],
@@ -19,7 +19,7 @@ export const metadata = {
 
   // General social media cards (slack, discord etc)
   openGraph: {
-    title: "ClaimFlow — ClaimWizard",
+    title: "ClaimWizard",
     description: "ClaimFlow Demo & Practice.",
     siteName: "ClaimFlow",
     locale: "nl_NL",
@@ -34,7 +34,7 @@ export const metadata = {
   },
 };
 
-// WCAG: First tab allows screenreaders to skip to the main content, if disabled person desires.
+// WCAG: First tab allows screenreaders to skip to the main content
 export default function RootLayout({
   children,
 }: {

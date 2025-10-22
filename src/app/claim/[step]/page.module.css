@@ -9,6 +9,12 @@
   gap: var(--space-3);
 }
 
+.required::after {
+  content: " *";
+  color: var(--error);
+  font-weight: 600;
+}
+
 .radios label {
   text-transform: capitalize;
   display: flex;
@@ -33,6 +39,11 @@
 .actions {
   display: flex;
   gap: var(--space-3);
+}
+
+.required::after {
+  content: " *";
+  color: var(--error);
 }
 
 .error {

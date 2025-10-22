@@ -48,9 +48,8 @@ export default function ProductStep({
       aria-describedby="product-help"
     >
       <fieldset>
-        <legend>
-          Welk product gaat het om? <span aria-hidden="true">*</span>
-        </legend>
+        <legend className={styles.required}>Welk product gaat het om?</legend>
+
         <p id="product-help" className="visually-hidden">
           Kies één product (verplicht)
         </p>
