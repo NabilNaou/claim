@@ -1,9 +1,9 @@
 "use client";
 
+import WizardActions from "@/app/claim/WizardActions";
 import { ClaimDraft, ClaimProduct, PRODUCTS } from "@/lib/claimTypes";
 import { useRef, useState } from "react";
 import styles from "./page.module.css";
-import WizardActions from "@/app/claim/WizardActions";
 
 interface ProductStepProps {
   draft: Pick<ClaimDraft, "product">;
@@ -59,7 +59,7 @@ export default function ProductStep({
           className={styles.radios}
           role="radiogroup"
           aria-describedby="product-help"
-          aria-errormessage={hasError ? "product-error" : undefined}
+          aria-invalid={hasError}
         >
           {PRODUCTS.map((product) => (
             <label key={product}>
@@ -70,6 +70,7 @@ export default function ProductStep({
                 checked={draft.product === product}
                 onChange={() => handleProductChange(product)}
                 aria-invalid={hasError}
+                aria-describedby={hasError ? "product-error" : "product-help"}
               />
               {product}
             </label>
