@@ -77,11 +77,13 @@ export default function ProductStep({
           ))}
         </div>
 
-        {hasError && (
-          <p ref={errorRef} id="product-error" role="alert" tabIndex={-1}>
-            Maak een keuze om door te gaan.
-          </p>
-        )}
+        <div className={styles.error}>
+          {hasError && (
+            <p ref={errorRef} id="product-error" role="alert" tabIndex={-1}>
+              Maak een keuze om door te gaan.
+            </p>
+          )}
+        </div>
       </fieldset>
 
       <WizardActions onBack={onBack} nextType="submit" />

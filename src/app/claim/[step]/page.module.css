@@ -38,11 +38,16 @@
 .error {
   min-height: 1.5em;
   color: var(--error);
-  margin-top: var(--space-2);
+  margin-top: var(--space-3);
 }
 
 .error:focus {
   outline: none;
+}
+
+.error p {
+  margin: 0;
+  line-height: 1.2;
 }
 
 /* Buttons */
