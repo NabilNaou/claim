@@ -20,9 +20,13 @@ export default function ProductStep({
 }: ProductStepProps) {
   const [showError, setShowError] = useState(false);
   const errorRef = useRef<HTMLParagraphElement>(null);
-
   const hasError = showError && !draft.product;
 
+  /**
+   * Form submission (i.e. going to the next step).
+   * Go to next, or display an error depending on the validation.
+   * @returns
+   */
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
@@ -35,6 +39,10 @@ export default function ProductStep({
     onNext();
   }
 
+  /**
+   * Change event for the radio buttons. Update selection, hide existing errors.
+   * @param product  - the newly selected product.
+   */
   function handleProductChange(product: ClaimProduct) {
     update({ product });
     setShowError(false);
