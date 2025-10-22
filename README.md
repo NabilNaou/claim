@@ -1,15 +1,15 @@
-- Work in progress
+Work in progress
 
-NL:
-Het doel van dit portfolio is om een toegankelijke claimwizard te ontwikkelen als oefenproject. Ik wil hiermee oefenen met onderwerpen zoals Next.js, Redux en SSR.
+** NL **:
+Het doel van dit portfolio-projectje is het ontwikkelen van een accessible stepper als oefening. Hiermee oefen ik voornamelijk met Next.js, React, Redux en server-side rendering (SSR).
 
-Het einddoel is om gebruik te maken van Next.js, React, CSS/HTML, Storybook en Redux. Het moet toegankelijk zijn (screenreader/keyboard, wcag). Clean code architectuur en type safe. De locale is voorlopig vast ingesteld op NL (geen i18n).
+Het einddoel is een schone, type-safe code architectuur te hebben met goede performance en screenreader / keyboard support (WCAG). De locale is voorlopig vast ingesteld op NL (geen i18n).
 
-Het project is een set-up wizard/stepper van vijf stappen met wat validatie. Het is de bedoeling dat dit project niet te groot wordt.
+Het project is een set-up wizard/stepper waarbij de gebruiker van stap 1 t/m 5 gaat met wat validatie. Het is de bedoeling dat dit project niet te groot wordt.
 
-EN:
-The goal of this portfolio is to develop an accessible claim wizard as a practice project. This is practice for topics like Next, Redux, and SSR.
+** EN **:
+The goal of this portfolio project is to develop an accessible stepper as an exercise. I'll be practicing primarily with Next.js, React, Redux, and server-side rendering (SSR).
 
-The ultimate goal is to use Next, React, CSS/HTML, Storybook, and Redux. It must be accessible (screen reader/keyboard, WCAG), have a clean code architecture, and perform well.
+The end goal is a clean, type-safe code architecture with good performance and screen reader/keyboard support (WCAG). The locale is currently set to NL (no i18n).
 
-The project is a setup wizard/stepper that guides the user from steps 1 through 5, with some validation. The project is intended to be kept to a minimum.
+The project is a setup wizard/stepper that guides the user from steps 1 through 5, with some validation. The goal is to keep this project small.
