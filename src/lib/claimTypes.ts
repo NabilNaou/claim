@@ -1,14 +1,16 @@
-export type ClaimProduct = "auto" | "reis" | "wonen";
+export const PRODUCTS = ["auto", "reis", "wonen"] as const;
+
+export type ClaimProduct = (typeof PRODUCTS)[number];
 
 export type ClaimDraft = {
-  product: ClaimProduct | "";
+  product: ClaimProduct | null;
   incidentDate: string;
   iban: string;
   description: string;
 };
 
 export const emptyDraft: ClaimDraft = {
-  product: "",
+  product: null,
   incidentDate: "",
   iban: "",
   description: "",

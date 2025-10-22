@@ -9,7 +9,7 @@
   --error: #b91c1c;
   --focus: #2563eb;
 
-  /* Spacing & radii between elements */
+  /* Spacing & radius */
   --radius: 0.625em;
   --space-1: 0.25em;
   --space-2: 0.5em;
@@ -33,7 +33,7 @@
     --muted: #9ca3af;
     --border: #2a2a2a;
     --primary: #0072e5;
-    --primary-contrast: #0a0a0a;
+    --primary-contrast: #ffffff;
     --error: #f87171;
     --focus: #93c5fd;
   }

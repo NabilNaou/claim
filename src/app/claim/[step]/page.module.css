@@ -3,13 +3,20 @@
   gap: var(--space-5);
 }
 
+/* Labels & Radios */
 .radios {
   display: grid;
   gap: var(--space-3);
 }
 
-/* Mooie labels met ruimte en duidelijke klikbare targets */
+.required::after {
+  content: " *";
+  color: var(--error);
+  font-weight: 600;
+}
+
 .radios label {
+  text-transform: capitalize;
   display: flex;
   align-items: center;
   gap: var(--space-3);
@@ -20,13 +27,58 @@
 }
 
 .radios input[type="radio"] {
-  /* native radio met thema-kleur voor goede a11y/contrasten */
   accent-color: var(--primary);
+}
+
+.radios[aria-invalid="true"] {
+  border: 1px solid var(--error);
+  border-radius: var(--radius);
+  padding: var(--space-3);
+}
+
+.input[aria-invalid="true"]:focus-visible {
+  outline: none;
+}
+
+.field {
+  display: grid;
+  gap: var(--space-2);
+}
+
+/* helptekst (onder input) */
+.help {
+  color: var(--muted);
+  font-size: 0.95em;
+  margin: 0;
+}
+
+.input[aria-invalid="true"] {
+  border-color: var(--error);
 }
 
 .actions {
   display: flex;
   gap: var(--space-3);
+}
+
+.required::after {
+  content: " *";
+  color: var(--error);
+}
+
+.error {
+  min-height: 1.5em;
+  color: var(--error);
+  margin-top: var(--space-3);
+}
+
+.error:focus {
+  outline: none;
+}
+
+.error p {
+  margin: 0;
+  line-height: 1.2;
 }
 
 /* Buttons */
@@ -39,8 +91,16 @@
   border: 0.0625em solid var(--primary);
   background: var(--primary);
   color: var(--primary-contrast);
-  text-decoration: none;
+  font-weight: 500;
   cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    filter 0.15s ease;
+}
+
+.button:hover:not(:disabled) {
+  filter: brightness(0.9);
 }
 
 .button:disabled {
