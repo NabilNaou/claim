@@ -92,12 +92,18 @@ legend {
 /* WCAG 2.4.1: Bypass blocks of content */
 .skip {
   position: absolute;
-  width: 0.1em;
-  height: 0.1em;
-  overflow: hidden;
+  top: 0;
+  left: 0;
+  transform: translateY(-200%); /* Move off-screen for non screen readers. */
   clip-path: inset(50%);
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  white-space: nowrap;
+  border: 0;
 }
 
+/* TODO: Make re-appear on screen reader select */
 .skip:focus {
   left: 0;
   clip-path: none;
