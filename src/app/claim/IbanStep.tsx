@@ -33,7 +33,6 @@ function formatIbanDisplay(raw: string) {
  */
 function isValidIban(raw: string) {
   const compact = normalizeIban(raw);
-  // test provides validation for our iban.
   return /^NL\d{2}[A-Z]{4}\d{10}$/.test(compact);
 }
 
