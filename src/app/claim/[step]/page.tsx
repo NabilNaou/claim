@@ -1,6 +1,7 @@
 "use client";
 
 import PlaceholderStep from "@/app/claim/[step]/PlaceholderStep";
+import IbanStep from "@/app/claim/IbanStep";
 import IncidentDateStep from "@/app/claim/IncidentDateStep";
 import ProductStep from "@/app/claim/ProductStep";
 import Stepper from "@/components/ui/Stepper";
@@ -38,7 +39,16 @@ export default function ClaimStepPage() {
         />
       )}
 
-      {step > 2 && (
+      {step === 3 && (
+        <IbanStep
+          draft={draft}
+          update={update}
+          onNext={() => router.push("/claim/4")}
+          onBack={() => router.push("/claim/2")}
+        />
+      )}
+
+      {step > 3 && (
         <PlaceholderStep
           step={step}
           onNext={() => router.push(`/claim/${step + 1}`)}
