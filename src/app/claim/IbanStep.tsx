@@ -90,9 +90,8 @@ export default function IbanStep({ draft, update, onNext, onBack }: IbanProps) {
           value={formatted}
           onChange={handleChange}
           aria-invalid={hasError}
-          aria-describedby={`${ids.help} ${hasError ? ids.error : ""}`}
+          aria-describedby={hasError ? `${ids.help} ${ids.error}` : ids.help}
           aria-errormessage={hasError ? ids.error : undefined}
-          inputMode="text"
           autoComplete="off"
           autoCapitalize="characters"
         />
@@ -103,7 +102,7 @@ export default function IbanStep({ draft, update, onNext, onBack }: IbanProps) {
 
         <div className={styles.error}>
           {hasError && (
-            <p id={ids.error} role="alert" tabIndex={-1}>
+            <p id={ids.error} role="alert">
               Vul een geldig NL-IBAN in (NL + 2 cijfers + 4 letters + 10
               cijfers).
             </p>
