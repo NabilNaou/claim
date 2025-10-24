@@ -4,6 +4,7 @@ import { useParams, useRouter } from "next/navigation";
 
 import styles from "@/app/claim/[step]/page.module.css";
 import PlaceholderStep from "@/app/claim/[step]/PlaceholderStep";
+import DescriptionStep from "@/app/claim/DescriptionStep";
 import IbanStep from "@/app/claim/IbanStep";
 import IncidentDateStep from "@/app/claim/IncidentDateStep";
 import ProductStep from "@/app/claim/ProductStep";
@@ -49,8 +50,16 @@ export default function ClaimStepPage() {
           onBack={() => router.push("/claim/2")}
         />
       )}
+      {step === 4 && (
+        <DescriptionStep
+          draft={draft}
+          update={update}
+          onNext={() => router.push("/claim/5")}
+          onBack={() => router.push("/claim/3")}
+        />
+      )}
 
-      {step > 3 && (
+      {step > 4 && (
         <PlaceholderStep
           step={step}
           onNext={() => router.push(`/claim/${step + 1}`)}
