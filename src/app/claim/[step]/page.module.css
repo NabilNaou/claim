@@ -199,7 +199,8 @@
     font-size: 0.85em;
     color: var(--muted);
   }
-  &[data-error="true"] {
+
+  .counter[data-error="true"] {
     color: var(--error);
   }
 }
