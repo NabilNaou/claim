@@ -21,7 +21,7 @@
   align-items: center;
   gap: var(--space-3);
   padding: var(--space-3);
-  border: 1px solid var(--border);
+  border: 0.0625em solid var(--border);
   border-radius: var(--radius);
   cursor: pointer;
 }
@@ -31,7 +31,7 @@
 }
 
 .radios[aria-invalid="true"] {
-  border: 1px solid var(--error);
+  border: 0.0625em solid var(--error);
   border-radius: var(--radius);
   padding: var(--space-3);
 }
@@ -59,11 +59,6 @@
 .actions {
   display: flex;
   gap: var(--space-3);
-}
-
-.required::after {
-  content: " *";
-  color: var(--error);
 }
 
 .error {
