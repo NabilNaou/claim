@@ -2,7 +2,8 @@
 
 import styles from "@/app/claim/[step]/page.module.css";
 import WizardActions from "@/app/claim/WizardActions";
-import { ClaimDraft, ClaimProduct, PRODUCTS } from "@/lib/claimTypes";
+import type { ClaimDraft, ClaimProduct } from "@/lib/claimTypes";
+import { PRODUCTS } from "@/lib/claimTypes";
 import { useRef, useState } from "react";
 
 interface ProductStepProps {
@@ -76,7 +77,6 @@ export default function ProductStep({
                 value={product}
                 checked={draft.product === product}
                 onChange={() => handleProductChange(product)}
-                aria-invalid={hasError}
                 aria-describedby={hasError ? "product-error" : "product-help"}
               />
               {product}

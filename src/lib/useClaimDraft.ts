@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
-import { ClaimDraft, emptyDraft } from "./claimTypes";
+import type { ClaimDraft} from "./claimTypes";
+import { emptyDraft } from "./claimTypes";
 
 const KEY = "claimDraft";
 
