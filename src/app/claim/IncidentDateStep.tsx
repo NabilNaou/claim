@@ -1,11 +1,14 @@
 "use client";
 
 import type { FormEvent } from "react";
-import { useId, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 import styles from "@/app/claim/[step]/page.module.css";
 import WizardActions from "@/app/claim/WizardActions";
 import type { ClaimDraft } from "@/lib/claimTypes";
+import { getTodayIsoLocal } from "@/lib/dates";
+import { useFieldIds } from "@/lib/useFieldIds";
+import { validateIncidentDate } from "@/lib/validator";
 
 type IncidentStepProps = {
   draft: Pick<ClaimDraft, "incidentDate">;
@@ -13,38 +16,6 @@ type IncidentStepProps = {
   onNext: () => void;
   onBack: () => void;
 };
-
-/**
- * Returns todays date in local ISO format.
- * @returns {string}
- */
-function getTodayIsoLocal(): string {
-  const d = new Date();
-  // Timezone offset for the correct local date calculation.
-  d.setMinutes(d.getMinutes() - d.getTimezoneOffset());
-  return d.toISOString().slice(0, 10);
-}
-
-/**
- * Validates the incident date.
- * @param {string} value - The date string from the input.
- * @param {string} today - Todays date string for comparison. Date shouldnt be in the future.
- * @returns
- */
-function validateIncidentDate(value: string, today: string) {
-  const isEmpty = !value;
-  const isFuture = value > today;
-  const hasError = isEmpty || isFuture;
-  let message: string | undefined;
-
-  if (isEmpty) {
-    message = "Vul een datum in.";
-  } else if (isFuture) {
-    message = "Datum mag niet in de toekomst liggen.";
-  }
-
-  return { isEmpty, isFuture, hasError, message };
-}
 
 export default function IncidentDateStep({
   draft,
@@ -54,16 +25,11 @@ export default function IncidentDateStep({
 }: IncidentStepProps) {
   const [showError, setShowError] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
-  const uid = useId();
 
-  const ids = {
-    input: `${uid}-incident-date`,
-    help: `${uid}-date-help`,
-    error: `${uid}-date-error`,
-  };
-
+  const ids = useFieldIds("incident-date");
   const today = getTodayIsoLocal();
   const value = draft.incidentDate || "";
+
   const { hasError, message } = validateIncidentDate(value, today);
   const shouldShowError = showError && hasError;
 

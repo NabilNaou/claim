@@ -1,11 +1,13 @@
 "use client";
 
 import type { ChangeEvent, FormEvent } from "react";
-import { useId, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 import styles from "@/app/claim/[step]/page.module.css";
 import WizardActions from "@/app/claim/WizardActions";
 import type { ClaimDraft } from "@/lib/claimTypes";
+import { useFieldIds } from "@/lib/useFieldIds";
+import { validateDescription } from "@/lib/validator";
 
 type DescriptionProps = {
   draft: Pick<ClaimDraft, "description">;
@@ -17,69 +19,28 @@ type DescriptionProps = {
 const MIN = 20;
 const MAX = 500;
 
-/**
- * Normalizes the textbox. This is needed to prevent user from just spamming spacebar, for example.
- * @param value - the value to normalize
- * @returns
- */
-function normalize(value: string): string {
-  return value.replace(/\s+/g, " ").trim();
-}
-
-/**
- * Validate the description of step 4.
- * Calculates the normalised length, checks if it is too short/long, show message depending.
- * @param raw - the un-normalized version of the text.
- * @returns
- */
-function validateDescription(raw: string) {
-  const normalized = normalize(raw);
-  const normalizedLength = normalized.length;
-
-  const tooShort = normalizedLength < MIN;
-  const tooLong = normalizedLength > MAX;
-  const hasError = tooShort || tooLong;
-
-  const message = tooShort
-    ? `Schrijf alstublieft iets meer (minimaal ${MIN} tekens).`
-    : tooLong
-      ? `Je omschrijving is te lang (maximaal ${MAX} tekens).`
-      : "";
-
-  return { normalized, normalizedLength, tooShort, tooLong, hasError, message };
-}
-
 export default function DescriptionStep({
   draft,
   update,
   onNext,
   onBack,
 }: DescriptionProps) {
-  const uid = useId();
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [showError, setShowError] = useState(false);
+  const ids = useFieldIds("desc");
 
-  const ids = {
-    input: `${uid}-desc`,
-    help: `${uid}-desc-help`,
-    error: `${uid}-desc-error`,
-    counter: `${uid}-desc-counter`,
-  };
-
-  const value = draft.description ?? "";
+  const value = draft.description;
   const { normalized, normalizedLength, tooShort, tooLong, hasError, message } =
-    validateDescription(value);
+    validateDescription(value, MIN, MAX);
   const shouldShowError = showError && hasError;
 
   function handleChange(error: ChangeEvent<HTMLTextAreaElement>) {
-    if (showError) {
-      setShowError(false);
-    }
+    if (showError) setShowError(false);
     update({ description: error.currentTarget.value });
   }
 
-  function handleSubmit(e: FormEvent) {
-    e.preventDefault();
+  function handleSubmit(error: FormEvent) {
+    error.preventDefault();
     if (hasError) {
       setShowError(true);
       textareaRef.current?.focus();
@@ -88,8 +49,6 @@ export default function DescriptionStep({
     update({ description: normalized });
     onNext();
   }
-
-  const counterLabel = `${normalizedLength}/${MAX}`;
 
   return (
     <form className={styles.form} onSubmit={handleSubmit} noValidate>
@@ -128,7 +87,7 @@ export default function DescriptionStep({
             data-error={tooLong || (showError && tooShort) ? "true" : "false"}
             aria-live="polite"
           >
-            {counterLabel}
+            {normalizedLength}/{MAX}
           </div>
         </div>
 
