@@ -119,3 +119,8 @@
     background-color: var(--border);
   }
 }
+
+.headerLine {
+  padding-block-end: var(--space-1);
+  border-bottom: 0.0625em solid var(--border);
+}
