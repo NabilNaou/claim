@@ -155,7 +155,7 @@
   --holo-color: var(--border);
 }
 
-/* Volledige sweep van links-buiten naar rechts-buiten */
+/* Complete sweep left to right */
 @keyframes sheen {
   from {
     transform: translateX(-120%);
