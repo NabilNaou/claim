@@ -40,6 +40,7 @@ export default function DescriptionStep({
 
   const value = draft.description ?? "";
   const normalized = normalize(value);
+  const visibleCount = normalized.length;
   const tooShort = normalized.length < MIN;
   const tooLong = normalized.length > MAX;
   const hasError = tooShort || tooLong;
@@ -63,7 +64,7 @@ export default function DescriptionStep({
     onNext();
   }
 
-  const counterLabel = `${value.length}/${MAX}`;
+  const counterLabel = `${visibleCount}/${MAX}`;
 
   return (
     <form className={styles.form} onSubmit={handleSubmit} noValidate>
@@ -75,7 +76,7 @@ export default function DescriptionStep({
           ref={textareaRef}
           id={ids.input}
           name="description"
-          className={`${styles.input} ${styles.textarea ?? ""}`}
+          className={`${styles.input} ${styles.textarea}`}
           rows={6}
           value={value}
           onChange={handleChange}
