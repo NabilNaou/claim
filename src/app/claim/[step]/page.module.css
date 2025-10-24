@@ -96,12 +96,50 @@
   color: var(--primary-contrast);
   font-weight: 500;
   cursor: pointer;
-  transition:
-    background-color 0.15s ease,
-    color 0.15s ease;
+
+  /**  Fun experiment, holo effect. TODO: Replace with something more appropriate. */
+  --holo-color: var(--primary);
+  --holo-sheen: rgba(255, 255, 255, 0.22);
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -60% -60%;
+    background: linear-gradient(
+      120deg,
+      transparent 46%,
+      var(--holo-sheen) 50%,
+      transparent 54%
+    );
+    transform: translateX(-120%);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  &::after {
+    content: "";
+    box-shadow:
+      0 0 0 0.0625em color-mix(in srgb, var(--holo-color) 55%, transparent),
+      0 0 0.9em color-mix(in srgb, var(--holo-color) 40%, transparent);
+    transition: opacity 0.25s ease;
+  }
 
   &:hover:not(:disabled) {
-    filter: brightness(0.9);
+    &::after {
+      opacity: 1;
+    }
+    &::before {
+      opacity: 1;
+      animation: sheen 01s ease forwards;
+    }
+  }
+
+  &:focus-visible::after {
+    opacity: 1;
   }
 
   &:disabled {
@@ -114,9 +152,16 @@
   background: transparent;
   color: inherit;
   border-color: var(--border);
+  --holo-color: var(--border);
+}
 
-  &:hover {
-    background-color: var(--border);
+/* Volledige sweep van links-buiten naar rechts-buiten */
+@keyframes sheen {
+  from {
+    transform: translateX(-120%);
+  }
+  to {
+    transform: translateX(120%);
   }
 }
 
