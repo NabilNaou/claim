@@ -52,12 +52,6 @@ h2 {
   margin-bottom: var(--space-3);
 }
 
-/* Forms */
-label {
-  display: block;
-  margin-bottom: var(--space-2);
-}
-
 input[type="text"],
 input[type="date"],
 textarea,
