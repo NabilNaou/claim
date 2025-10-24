@@ -9,8 +9,9 @@
   margin-top: var(--space-4);
 }
 
-.inline > * + * {
-  margin-left: var(--space-3);
+.inline {
+  display: flex;
+  gap: var(--space-3);
 }
 
 .visually-hidden {
