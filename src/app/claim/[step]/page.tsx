@@ -2,6 +2,7 @@
 
 import { useParams, useRouter } from "next/navigation";
 
+import styles from "@/app/claim/[step]/page.module.css";
 import PlaceholderStep from "@/app/claim/[step]/PlaceholderStep";
 import IbanStep from "@/app/claim/IbanStep";
 import IncidentDateStep from "@/app/claim/IncidentDateStep";
@@ -18,7 +19,7 @@ export default function ClaimStepPage() {
 
   return (
     <section className="stack" aria-labelledby="h1">
-      <h1 id="h1">Claim indienen</h1>
+      <h1 className={styles.headerLine}>Claim indienen</h1>
       <p className="visually-hidden">Stap {step} van 5</p>
       <Stepper step={step} />
 

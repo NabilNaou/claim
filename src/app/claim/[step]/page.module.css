@@ -3,117 +3,169 @@
   gap: var(--space-5);
 }
 
-/* Labels & Radios */
-.radios {
-  display: grid;
-  gap: var(--space-3);
-}
-
-.required::after {
-  content: " *";
-  color: var(--error);
-  font-weight: 600;
-}
-
-.radios label {
-  text-transform: capitalize;
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  padding: var(--space-3);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  cursor: pointer;
-}
-
-.radios input[type="radio"] {
-  accent-color: var(--primary);
-}
-
-.radios[aria-invalid="true"] {
-  border: 1px solid var(--error);
-  border-radius: var(--radius);
-  padding: var(--space-3);
-}
-
-.input[aria-invalid="true"]:focus-visible {
-  outline: none;
-}
-
 .field {
   display: grid;
   gap: var(--space-2);
+
+  &:has(input[aria-invalid="true"]) .radios {
+    border: 0.0625em solid var(--error);
+    border-radius: var(--radius);
+    padding: var(--space-3);
+  }
 }
 
-/* helptekst (onder input) */
+.required {
+  &::after {
+    content: " *";
+    color: var(--error);
+    font-weight: 600;
+  }
+}
+
+/* Radios */
+.radios {
+  &[aria-invalid="true"] {
+    border: 0.0625em solid var(--error);
+    border-radius: var(--radius);
+    padding: var(--space-3);
+  }
+
+  display: grid;
+  gap: var(--space-3);
+
+  label {
+    text-transform: capitalize;
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3);
+    border: 0.0625em solid var(--border);
+    border-radius: var(--radius);
+    cursor: pointer;
+  }
+
+  input[type="radio"] {
+    accent-color: var(--primary);
+  }
+}
+
+/* Inputs */
+.input {
+  &[aria-invalid="true"] {
+    border-color: var(--error);
+
+    &:focus-visible {
+      outline: none;
+    }
+  }
+}
+
+/* Help & errors */
 .help {
   color: var(--muted);
   font-size: 0.95em;
   margin: 0;
 }
 
-.input[aria-invalid="true"] {
-  border-color: var(--error);
+.error {
+  min-height: 1.5em;
+  color: var(--error);
+  margin-top: var(--space-3);
+
+  p {
+    margin: 0;
+    line-height: 1.2;
+  }
 }
 
+/* (Action)buttons */
 .actions {
   display: flex;
   gap: var(--space-3);
 }
 
-.required::after {
-  content: " *";
-  color: var(--error);
-}
-
-.error {
-  min-height: 1.5em;
-  color: var(--error);
-  margin-top: var(--space-3);
-}
-
-.error:focus {
-  outline: none;
-}
-
-.error p {
-  margin: 0;
-  line-height: 1.2;
-}
-
-/* Buttons */
 .button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: var(--space-2) var(--space-4);
+  padding-block: var(--space-2);
+  padding-inline: var(--space-4);
   border-radius: var(--radius);
   border: 0.0625em solid var(--primary);
   background: var(--primary);
   color: var(--primary-contrast);
   font-weight: 500;
   cursor: pointer;
-  transition:
-    background-color 0.15s ease,
-    color 0.15s ease,
-    filter 0.15s ease;
-}
 
-.button:hover:not(:disabled) {
-  filter: brightness(0.9);
-}
+  /**  Fun experiment, holo effect. TODO: Replace with something more appropriate. */
+  --holo-color: var(--primary);
+  --holo-sheen: rgba(255, 255, 255, 0.22);
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
 
-.button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -60% -60%;
+    background: linear-gradient(
+      120deg,
+      transparent 46%,
+      var(--holo-sheen) 50%,
+      transparent 54%
+    );
+    transform: translateX(-120%);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  &::after {
+    content: "";
+    box-shadow:
+      0 0 0 0.0625em color-mix(in srgb, var(--holo-color) 55%, transparent),
+      0 0 0.9em color-mix(in srgb, var(--holo-color) 40%, transparent);
+    transition: opacity 0.25s ease;
+  }
+
+  &:hover:not(:disabled) {
+    &::after {
+      opacity: 1;
+    }
+    &::before {
+      opacity: 1;
+      animation: sheen 01s ease forwards;
+    }
+  }
+
+  &:focus-visible::after {
+    opacity: 1;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
 }
 
 .secondary {
   background: transparent;
   color: inherit;
   border-color: var(--border);
+  --holo-color: var(--border);
 }
 
-.secondary:hover {
-  background: var(--border);
+/* Complete sweep left to right */
+@keyframes sheen {
+  from {
+    transform: translateX(-120%);
+  }
+  to {
+    transform: translateX(120%);
+  }
+}
+
+.headerLine {
+  padding-block-end: var(--space-1);
+  border-bottom: 0.0625em solid var(--border);
 }
