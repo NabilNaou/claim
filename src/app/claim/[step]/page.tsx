@@ -1,12 +1,13 @@
 "use client";
 
+import { useParams, useRouter } from "next/navigation";
+
 import PlaceholderStep from "@/app/claim/[step]/PlaceholderStep";
 import IbanStep from "@/app/claim/IbanStep";
 import IncidentDateStep from "@/app/claim/IncidentDateStep";
 import ProductStep from "@/app/claim/ProductStep";
 import Stepper from "@/components/ui/Stepper";
 import { useClaimDraft } from "@/lib/useClaimDraft";
-import { useParams, useRouter } from "next/navigation";
 
 export default function ClaimStepPage() {
   const { step: stepParam } = useParams<{ step: string }>();

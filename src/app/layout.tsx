@@ -1,5 +1,7 @@
 import "./globals.css";
 
+import type { ReactNode } from "react";
+
 export const metadata = {
   title: "Claim Stepper",
   description: "Claimwizard built using Next/React - demo & practice.",
@@ -35,11 +37,7 @@ export const metadata = {
 };
 
 // WCAG: First tab allows screenreaders to skip to the main content
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="nl">
       <body>

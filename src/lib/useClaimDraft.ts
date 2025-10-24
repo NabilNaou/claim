@@ -1,39 +1,48 @@
 "use client";
-import { useEffect, useState } from "react";
-import { ClaimDraft, emptyDraft } from "./claimTypes";
+import { useState } from "react";
+
+import type { ClaimDraft } from "./claimTypes";
+import { emptyDraft } from "./claimTypes";
 
 const KEY = "claimDraft";
 
+// Disable for testing.
+const DEV_BYPASS_STORAGE = true;
+
 /** LocalStorage placeholder claim draft. TODO: replace with redux. */
 export function useClaimDraft() {
-  const [draft, setDraft] = useState<ClaimDraft>(emptyDraft);
+  const [draft, setDraft] = useState<ClaimDraft>(() => {
+    if (DEV_BYPASS_STORAGE || typeof window === "undefined") {
+      return emptyDraft;
+    }
 
-  useEffect(() => {
     const raw = localStorage.getItem(KEY);
     if (raw) {
       try {
-        setDraft({ ...emptyDraft, ...JSON.parse(raw) });
+        return { ...emptyDraft, ...JSON.parse(raw) };
       } catch (error) {
         console.error("Placeholder storing went wrong:", error);
         localStorage.removeItem(KEY);
       }
     }
-  }, []);
+    return emptyDraft;
+  });
 
   function update(patch: Partial<ClaimDraft>) {
-    setDraft((prev) => ({ ...prev, ...patch }));
+    const next = { ...draft, ...patch };
+    setDraft(next);
+
+    if (!DEV_BYPASS_STORAGE) {
+      localStorage.setItem(KEY, JSON.stringify(next));
+    }
   }
 
-  useEffect(() => {
-    localStorage.setItem(KEY, JSON.stringify(draft));
-  }, [draft]);
-
-  return {
-    draft,
-    update,
-    reset: () => {
+  function reset() {
+    setDraft(emptyDraft);
+    if (!DEV_BYPASS_STORAGE) {
       localStorage.removeItem(KEY);
-      setDraft(emptyDraft);
-    },
-  };
+    }
+  }
+
+  return { draft, update, reset };
 }

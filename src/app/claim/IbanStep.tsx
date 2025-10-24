@@ -1,9 +1,11 @@
 "use client";
 
+import type { ChangeEvent, FormEvent } from "react";
+import { useId, useRef, useState } from "react";
+
 import styles from "@/app/claim/[step]/page.module.css";
 import WizardActions from "@/app/claim/WizardActions";
 import type { ClaimDraft } from "@/lib/claimTypes";
-import { useId, useRef, useState } from "react";
 
 /**
  * Normalized IBAN for storage. Uppercase + no spaces.
@@ -52,12 +54,12 @@ export default function IbanStep({ draft, update, onNext, onBack }: IbanProps) {
   const formatted = formatIbanDisplay(value);
   const hasError = showError && !isValidIban(value);
 
-  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+  function handleChange(e: ChangeEvent<HTMLInputElement>) {
     update({ iban: normalizeIban(e.currentTarget.value) });
     setShowError(false);
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  function handleSubmit(e: FormEvent) {
     e.preventDefault();
     if (!isValidIban(value)) {
       setShowError(true);
