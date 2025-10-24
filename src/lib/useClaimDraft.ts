@@ -1,15 +1,20 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import type { ClaimDraft } from "./claimTypes";
 import { emptyDraft } from "./claimTypes";
 
 const KEY = "claimDraft";
 
+// Disable for testing.
+const DEV_BYPASS_STORAGE = true;
+
 /** LocalStorage placeholder claim draft. TODO: replace with redux. */
 export function useClaimDraft() {
   const [draft, setDraft] = useState<ClaimDraft>(() => {
-    if (typeof window === "undefined") return emptyDraft;
+    if (DEV_BYPASS_STORAGE || typeof window === "undefined") {
+      return emptyDraft;
+    }
 
     const raw = localStorage.getItem(KEY);
     if (raw) {
@@ -24,19 +29,20 @@ export function useClaimDraft() {
   });
 
   function update(patch: Partial<ClaimDraft>) {
-    setDraft((prev) => ({ ...prev, ...patch }));
+    const next = { ...draft, ...patch };
+    setDraft(next);
+
+    if (!DEV_BYPASS_STORAGE) {
+      localStorage.setItem(KEY, JSON.stringify(next));
+    }
   }
 
-  useEffect(() => {
-    localStorage.setItem(KEY, JSON.stringify(draft));
-  }, [draft]);
-
-  return {
-    draft,
-    update,
-    reset: () => {
+  function reset() {
+    setDraft(emptyDraft);
+    if (!DEV_BYPASS_STORAGE) {
       localStorage.removeItem(KEY);
-      setDraft(emptyDraft);
-    },
-  };
+    }
+  }
+
+  return { draft, update, reset };
 }

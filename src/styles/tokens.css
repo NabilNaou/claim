@@ -26,15 +26,15 @@
   --line-height: 1.5;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0a0a0a;
-    --fg: #ededed;
-    --muted: #9ca3af;
-    --border: #2a2a2a;
-    --primary: #0072e5;
-    --primary-contrast: #ffffff;
-    --error: #f87171;
-    --focus: #93c5fd;
-  }
+/* TODO: Re-implement dark-mode. For now, always dark mode. */
+/* @media (prefers-color-scheme: dark) { */
+:root {
+  --bg: #0a0a0a;
+  --fg: #ededed;
+  --muted: #9ca3af;
+  --border: #2a2a2a;
+  --primary: #0072e5;
+  --primary-contrast: #ffffff;
+  --error: #f87171;
+  --focus: #93c5fd;
 }
