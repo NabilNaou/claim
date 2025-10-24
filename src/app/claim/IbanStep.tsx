@@ -54,8 +54,8 @@ export default function IbanStep({ draft, update, onNext, onBack }: IbanProps) {
   const formatted = formatIbanDisplay(value);
   const hasError = showError && !isValidIban(value);
 
-  function handleChange(e: ChangeEvent<HTMLInputElement>) {
-    update({ iban: normalizeIban(e.currentTarget.value) });
+  function handleChange(error: ChangeEvent<HTMLInputElement>) {
+    update({ iban: normalizeIban(error.currentTarget.value) });
     setShowError(false);
   }
 

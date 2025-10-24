@@ -17,8 +17,36 @@ type DescriptionProps = {
 const MIN = 20;
 const MAX = 500;
 
-function normalize(value: string) {
+/**
+ * Normalizes the textbox. This is needed to prevent user from just spamming spacebar, for example.
+ * @param value - the value to normalize
+ * @returns
+ */
+function normalize(value: string): string {
   return value.replace(/\s+/g, " ").trim();
+}
+
+/**
+ * Validate the description of step 4.
+ * Calculates the normalised length, checks if it is too short/long, show message depending.
+ * @param raw - the un-normalized version of the text.
+ * @returns
+ */
+function validateDescription(raw: string) {
+  const normalized = normalize(raw);
+  const normalizedLength = normalized.length;
+
+  const tooShort = normalizedLength < MIN;
+  const tooLong = normalizedLength > MAX;
+  const hasError = tooShort || tooLong;
+
+  const message = tooShort
+    ? `Schrijf alstublieft iets meer (minimaal ${MIN} tekens).`
+    : tooLong
+      ? `Je omschrijving is te lang (maximaal ${MAX} tekens).`
+      : "";
+
+  return { normalized, normalizedLength, tooShort, tooLong, hasError, message };
 }
 
 export default function DescriptionStep({
@@ -39,18 +67,15 @@ export default function DescriptionStep({
   };
 
   const value = draft.description ?? "";
-  const normalized = normalize(value);
-  const visibleCount = normalized.length;
-  const tooShort = normalized.length < MIN;
-  const tooLong = normalized.length > MAX;
-  const hasError = tooShort || tooLong;
+  const { normalized, normalizedLength, tooShort, tooLong, hasError, message } =
+    validateDescription(value);
   const shouldShowError = showError && hasError;
 
-  function handleChange(e: ChangeEvent<HTMLTextAreaElement>) {
-    update({ description: e.currentTarget.value });
+  function handleChange(error: ChangeEvent<HTMLTextAreaElement>) {
     if (showError) {
       setShowError(false);
     }
+    update({ description: error.currentTarget.value });
   }
 
   function handleSubmit(e: FormEvent) {
@@ -64,7 +89,7 @@ export default function DescriptionStep({
     onNext();
   }
 
-  const counterLabel = `${visibleCount}/${MAX}`;
+  const counterLabel = `${normalizedLength}/${MAX}`;
 
   return (
     <form className={styles.form} onSubmit={handleSubmit} noValidate>
@@ -110,9 +135,7 @@ export default function DescriptionStep({
         <div className={styles.error}>
           {shouldShowError && (
             <p id={ids.error} role="alert">
-              {tooShort
-                ? `Schrijf alstublieft iets meer (minimaal ${MIN} tekens).`
-                : `Je omschrijving is te lang (maximaal ${MAX} tekens).`}
+              {message}
             </p>
           )}
         </div>
