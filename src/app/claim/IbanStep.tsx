@@ -1,42 +1,17 @@
 "use client";
 
 import type { ChangeEvent, FormEvent } from "react";
-import { useId, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 import styles from "@/app/claim/[step]/page.module.css";
 import WizardActions from "@/app/claim/WizardActions";
 import type { ClaimDraft } from "@/lib/claimTypes";
-
-/**
- * Normalized IBAN for storage. Uppercase + no spaces.
- * @param raw - the raw IBAN.
- * @returns
- */
-function normalizeIban(raw: string) {
-  return raw.replace(/\s+/g, "").toUpperCase();
-}
-
-/**
- * For display. Format the iban in a presentable format:
- * uppercase, spacebar every 4 chars. Does not change logic.
- * @param raw - the raw pre transformed string.
- * @returns
- */
-function formatIbanDisplay(raw: string) {
-  const compact = normalizeIban(raw);
-  return compact.replace(/(.{4})/g, "$1 ").trim();
-}
-
-/**
- * For validation. Check if IBAN is: NL + 2 digits + 4 letters
- * + 10 digits.
- * @param raw
- * @returns
- */
-function isValidIban(raw: string) {
-  const compact = normalizeIban(raw);
-  return /^NL\d{2}[A-Z]{4}\d{10}$/.test(compact);
-}
+import { useFieldIds } from "@/lib/useFieldIds";
+import {
+  formatIbanDisplay,
+  isValidDutchIban,
+  normalizeIban,
+} from "@/lib/validator";
 
 type IbanProps = {
   draft: Pick<ClaimDraft, "iban">;
@@ -48,11 +23,11 @@ type IbanProps = {
 export default function IbanStep({ draft, update, onNext, onBack }: IbanProps) {
   const [showError, setShowError] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
-  const uid = useId();
+  const ids = useFieldIds("iban");
 
-  const value = draft.iban ?? "";
-  const formatted = formatIbanDisplay(value);
-  const hasError = showError && !isValidIban(value);
+  const raw = draft.iban;
+  const formatted = formatIbanDisplay(raw);
+  const hasError = showError && !isValidDutchIban(raw);
 
   function handleChange(error: ChangeEvent<HTMLInputElement>) {
     update({ iban: normalizeIban(error.currentTarget.value) });
@@ -61,19 +36,13 @@ export default function IbanStep({ draft, update, onNext, onBack }: IbanProps) {
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    if (!isValidIban(value)) {
+    if (!isValidDutchIban(raw)) {
       setShowError(true);
       inputRef.current?.focus();
       return;
     }
     onNext();
   }
-
-  const ids = {
-    input: `${uid}-iban`,
-    help: `${uid}-iban-help`,
-    error: `${uid}-iban-error`,
-  };
 
   return (
     <form className={styles.form} onSubmit={handleSubmit} noValidate>
