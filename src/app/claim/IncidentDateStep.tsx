@@ -1,9 +1,11 @@
 "use client";
 
+import type { FormEvent } from "react";
+import { useId, useRef, useState } from "react";
+
 import styles from "@/app/claim/[step]/page.module.css";
 import WizardActions from "@/app/claim/WizardActions";
 import type { ClaimDraft } from "@/lib/claimTypes";
-import { useId, useRef, useState } from "react";
 
 type IncidentStepProps = {
   draft: Pick<ClaimDraft, "incidentDate">;
@@ -65,7 +67,7 @@ export default function IncidentDateStep({
   const { hasError, message } = validateIncidentDate(value, today);
   const shouldShowError = showError && hasError;
 
-  function handleSubmit(e: React.FormEvent) {
+  function handleSubmit(e: FormEvent) {
     e.preventDefault();
     if (hasError) {
       setShowError(true);

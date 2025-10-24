@@ -1,10 +1,12 @@
 "use client";
 
+import type { FormEvent } from "react";
+import { useRef, useState } from "react";
+
 import styles from "@/app/claim/[step]/page.module.css";
 import WizardActions from "@/app/claim/WizardActions";
 import type { ClaimDraft, ClaimProduct } from "@/lib/claimTypes";
 import { PRODUCTS } from "@/lib/claimTypes";
-import { useRef, useState } from "react";
 
 interface ProductStepProps {
   draft: Pick<ClaimDraft, "product">;
@@ -28,7 +30,7 @@ export default function ProductStep({
    * Go to next, or display an error depending on the validation.
    * @returns
    */
-  function handleSubmit(e: React.FormEvent) {
+  function handleSubmit(e: FormEvent) {
     e.preventDefault();
 
     if (!draft.product) {
@@ -77,7 +79,6 @@ export default function ProductStep({
                 value={product}
                 checked={draft.product === product}
                 onChange={() => handleProductChange(product)}
-                aria-describedby={hasError ? "product-error" : "product-help"}
               />
               {product}
             </label>
