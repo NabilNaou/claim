@@ -1,7 +1,7 @@
 .container {
   max-width: 54rem;
-  padding: 0 var(--space-4);
-  margin: 0 auto;
+  padding-inline: var(--space-4);
+  margin-inline: auto;
 }
 
 /* Make room between all the children of specified */
@@ -20,6 +20,4 @@
   width: 1px;
   overflow: hidden;
   white-space: nowrap;
-  border: 0;
-  padding: 0;
 }

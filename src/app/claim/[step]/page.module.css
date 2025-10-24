@@ -67,10 +67,6 @@
   margin-top: var(--space-3);
 }
 
-.error:focus {
-  outline: none;
-}
-
 .error p {
   margin: 0;
   line-height: 1.2;
@@ -81,7 +77,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: var(--space-2) var(--space-4);
+  padding-block: var(--space-2);
+  padding-inline: var(--space-4);
   border-radius: var(--radius);
   border: 0.0625em solid var(--primary);
   background: var(--primary);
