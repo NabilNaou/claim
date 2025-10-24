@@ -169,3 +169,38 @@
   padding-block-end: var(--space-1);
   border-bottom: 0.0625em solid var(--border);
 }
+
+/* Description step resize textbox vertically */
+.textarea {
+  resize: vertical;
+}
+
+.counter {
+  justify-self: end;
+  font-size: 0.9em;
+  color: var(--muted);
+}
+
+.counter[data-error="true"] {
+  color: var(--error);
+}
+
+.helpRow {
+  display: grid;
+  grid-template-columns: 1fr auto;
+
+  .help {
+    color: var(--muted);
+    font-size: 0.85em;
+  }
+
+  .counter {
+    text-align: end;
+    font-size: 0.85em;
+    color: var(--muted);
+  }
+
+  .counter[data-error="true"] {
+    color: var(--error);
+  }
+}
