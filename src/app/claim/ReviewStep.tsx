@@ -30,7 +30,7 @@ export default function ReviewStep({ draft, onBack, onSubmitSuccess }: Props) {
     }
     setSubmitting(true);
 
-    // Simulatie “submit”; hier zou je fetch/POST doen
+    // placeholder submit TODO: simulatie vervangen
     setTimeout(() => {
       setSubmitting(false);
       onSubmitSuccess();
