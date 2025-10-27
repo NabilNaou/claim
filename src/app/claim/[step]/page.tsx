@@ -3,19 +3,18 @@
 import { useParams, useRouter } from "next/navigation";
 
 import styles from "@/app/claim/[step]/page.module.css";
-import PlaceholderStep from "@/app/claim/[step]/PlaceholderStep";
 import DescriptionStep from "@/app/claim/DescriptionStep";
 import IbanStep from "@/app/claim/IbanStep";
 import IncidentDateStep from "@/app/claim/IncidentDateStep";
 import ProductStep from "@/app/claim/ProductStep";
+import ReviewStep from "@/app/claim/ReviewStep";
 import Stepper from "@/components/ui/Stepper";
 import { useClaimDraft } from "@/lib/useClaimDraft";
 
 export default function ClaimStepPage() {
   const { step: stepParam } = useParams<{ step: string }>();
-  const step = Number(stepParam) || 1;
-
-  const { draft, update } = useClaimDraft();
+  const step = +stepParam;
+  const { draft, update, reset } = useClaimDraft();
   const router = useRouter();
 
   return (
@@ -59,11 +58,14 @@ export default function ClaimStepPage() {
         />
       )}
 
-      {step > 4 && (
-        <PlaceholderStep
-          step={step}
-          onNext={() => router.push(`/claim/${step + 1}`)}
-          onBack={() => router.push(`/claim/${step - 1}`)}
+      {step === 5 && (
+        <ReviewStep
+          draft={draft}
+          onBack={() => router.push("/claim/4")}
+          onSubmitSuccess={() => {
+            reset();
+            router.push("/claim/success");
+          }}
         />
       )}
     </section>

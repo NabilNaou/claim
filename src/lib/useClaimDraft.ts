@@ -7,7 +7,7 @@ import { emptyDraft } from "./claimTypes";
 const KEY = "claimDraft";
 
 // Disable for testing.
-const DEV_BYPASS_STORAGE = true;
+const DEV_BYPASS_STORAGE = false;
 
 /** LocalStorage placeholder claim draft. TODO: replace with redux. */
 export function useClaimDraft() {
