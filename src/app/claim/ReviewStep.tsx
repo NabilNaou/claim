@@ -9,13 +9,13 @@ import type { ClaimDraft } from "@/lib/claimTypes";
 import { useFieldIds } from "@/lib/useFieldIds";
 import { formatIbanDisplay } from "@/lib/validator";
 
-type Props = {
+type ReviewProps = {
   draft: ClaimDraft;
   onBack: () => void;
   onSubmitSuccess: () => void;
 };
 
-export default function ReviewStep({ draft, onBack, onSubmitSuccess }: Props) {
+export default function ReviewStep({ draft, onBack, onSubmitSuccess }: ReviewProps) {
   const [submitting, setSubmitting] = useState(false);
   const [agreeError, setAgreeError] = useState(false);
   const [agree, setAgree] = useState(false);
